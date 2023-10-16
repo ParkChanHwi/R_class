@@ -146,3 +146,97 @@ vec2 <- c(5000, 12000,13000, 8000, 9000, 3000, 5000, 4000, 4500,6000,8000,8500)
 vec3  <- c(2500,5000,6000,5500,7000,4600,3000,2500,3400,4700,6400,4400)
 df <- data.frame(Char = Char, vec2 = vec2, vec3= vec3)
 df
+
+id <- c(1:5)
+gender<-c("M","F","F","M","M")
+major<-c("Eng","Math","Com","Eng","Busi")
+salary<-c(2500,2800,2500,3000,2600)
+survey <- data.frame(ID = id, Gender = gender, Major = major,Salary=salary, stringsAsFactors = FALSE)
+survey
+
+head(survey, n=3) 
+tail(survey, n=3)
+survey$Salary
+survey[["Salary"]]
+
+survey[["Major"]]
+
+survey["Major"]
+
+survey[2]
+survey[[2]]
+
+survey$score=c(200,300,400,500,600)
+survey$ss=survey$Salary+survey$score
+
+summary(survey)
+
+typeof(survey$ID) 
+survey$ID= as.factor(survey$ID)
+survey
+typeof(survey$ID)
+survey$ID= as.character(survey$ID)
+
+summary(survey)
+#즁요한 이유 데이터를 받으면 엑셀로 받는데 엑셀은 숫자값을 불러와도 
+#텍스트 형식이다. 이는 데이터 분석 전 데이터를 원래 형식으로 바꿔줘야함
+
+names(survey) #vector type 가로 출력
+
+names(survey)[names(survey) == "ss"] = "temp"
+
+names(survey) 
+
+# dataframe indexing
+survey[c(1,2)] #id and gender
+
+survey[c(-1,-2)] #except id and gender
+
+survey[survey$Gender == "F",] # [ row,col ]  condition
+
+survey[survey$Major == "Eng" & survey$Salary > 2600,]
+
+survey[survey$Major == "Eng" | survey$Salary > 2600,]
+
+survey[,survey$Gender == "M"]
+
+
+survey[,c(1,2)] 
+
+
+survey[c(1,2),]
+
+# dataframe can combined using rbind, cbind
+survey1=data.frame(ID = id[1:3], Gender = gender[1:3], Major = major[1:3],Salary=salary[1:3], stringsAsFactors = FALSE)
+
+survey2 = data.frame(ID = id[4:5], Gender = gender[4:5], Major = major[4:5],Salary=salary[4:5], stringsAsFactors = FALSE)
+
+survey3 = rbind(survey1,survey2)
+
+survey1
+survey2
+survey3
+
+
+#subset function  
+
+survey <- subset(survey, survey$Gender == "M")
+survey
+
+survey_ID <- subset(survey, survey$Major == "Eng",select = c("ID", "Gender"))
+survey_ID
+
+
+# phone-num 010-0000-0000, 
+library("tidyr")
+name_age_df <- data.frame(
+  Name= c("Kim Cheol-soo", "Lee Cheol-soo", "Kim young-hee", "Lee Young-hee", "Kim min-jun", "Park Min-jun", "Kim Ji-young", "Park Ji-young"),
+  Age = c(20,24,21,24,35,40,34,35),
+  stringsAsFactors = FALSE
+)
+
+
+
+name_age_df<- separate(name_age_df, col = "Name", into = c("LastName", "FirstName"), sep = "-")
+
+print(name_age_df)
