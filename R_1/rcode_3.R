@@ -226,7 +226,7 @@ survey
 survey_ID <- subset(survey, survey$Major == "Eng",select = c("ID", "Gender"))
 survey_ID
 
-
+install.packages("tidyr")
 # phone-num 010-0000-0000, 
 library("tidyr")
 name_age_df <- data.frame(
@@ -240,3 +240,12 @@ name_age_df <- data.frame(
 name_age_df<- separate(name_age_df, col = "Name", into = c("LastName", "FirstName"), sep = "-")
 
 print(name_age_df)
+
+
+
+
+data <- read.csv("C:/Users/User/Desktop/test.csv", header = TRUE, 
+         stringsAsFactors = FALSE)
+data
+
+write.csv(survey, "C:/Users/User/Desktop/survey.csv", row.names = FALSE)
